@@ -19,13 +19,20 @@ const Forms = () => {
     })
     const { username, email, password, firstname, lastname, image } = data
 
-    const handleData = (e) => {
-        setData({ ...data, [e.target.id]: e.target.value })
-        console.log(e.target.value);
-    }
-
+    
     const [kosul, setKosul] = useState(false)
+    const [clickButton, setClickButton] = useState(false)
+    const [visiblePassword, setVisiblePassword] = useState(true)
+    const [cardVisible, setCardVisible] = useState(true)
+   
+    
+    
 
+    const handleData = (e) => {
+        setData({ ...data, [e.target.id]: e.target.value });
+    };
+
+    
     const handleFormStart = () => {
         if (
             password.length < 8 ||
@@ -36,7 +43,6 @@ const Forms = () => {
             setKosul(true);
         } else {
             setKosul(false);
-            
         }
     };
 
@@ -47,33 +53,28 @@ const Forms = () => {
         }, 100);
     };
 
-    const [clickButton, setClickButton] = useState(false)
-
+   
     
     const handleFormSubmit = (e) => {
         e.preventDefault()
         visibleCard()
-        
-        
+        setClickButton(true);
         setTimeout(() => {
-            setClickButton(false);
-        }, 500)
+            setClickButton(!cardVisible)
+        },500)
 
+             
 }
     
     
-
-    const [visiblePassword, setVisiblePassword] = useState(true)
     const changeVisibility = () => {
         setVisiblePassword(!visiblePassword)
     }
-    const [cardVisible, setCardVisible] = useState(true)
+    
     const visibleCard = () => {
         setCardVisible(!cardVisible)
+
     }
-
-
-
 
 
     return (
@@ -125,8 +126,8 @@ const Forms = () => {
                 </InputGroup>
 
                 <Form.Group className="mb-3 d-flex mx-auto" role='button' onMouseLeave={handleStop} >
-                    <Button className={`btn mt-3 ${kosul ? "animate" : ""}`} variant={kosul ? "success" : "danger"} type="submit"  disabled={kosul} onMouseMove={handleFormStart}>
-                       {clickButton ? "Loading.." : "Submit"}
+                    <Button className={`btn mt-3 ${kosul ? "animate" : ""}`} variant={kosul ? "success" : "danger"} type="submit"  disabled={kosul} onMouseMove={handleFormStart} >
+                       {clickButton ? "New Card" : "Submit"}
                     </Button>
                 </Form.Group>
                 {cardVisible ? "" : <Cards veri={data} />}
