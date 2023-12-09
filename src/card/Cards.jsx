@@ -1,8 +1,8 @@
 import { Card } from 'react-bootstrap';
 
 
-function Cards({ veri }) {
-  const { username, email, firstname, lastname, image } = veri
+function Cards({ user }) {
+  const { username, email, firstname, lastname, image } = user
   console.log(username);
   return (
     <Card className='text-center mx-auto mt-6' style={{ width: '50%' }}>

@@ -19,15 +19,13 @@ const Forms = () => {
     })
     const { username, email, password, firstname, lastname, image } = data
 
-    
+    const [user, setUser] = useState({})
     const [kosul, setKosul] = useState(false)
     const [clickButton, setClickButton] = useState(false)
     const [visiblePassword, setVisiblePassword] = useState(true)
     const [cardVisible, setCardVisible] = useState(true)
    
     
-    
-
     const handleData = (e) => {
         setData({ ...data, [e.target.id]: e.target.value });
     };
@@ -62,7 +60,22 @@ const Forms = () => {
         setTimeout(() => {
             setClickButton(!cardVisible)
         },500)
-
+setUser({
+    email,
+    username,
+    firstname,
+    lastname,
+    image,
+    password,
+})
+setData({
+    username: "",
+        email: "",
+        password: "",
+        firstname: "",
+        lastname: "",
+        image: "",
+})
              
 }
     
@@ -130,7 +143,7 @@ const Forms = () => {
                        {clickButton ? "New Card" : "Submit"}
                     </Button>
                 </Form.Group>
-                {cardVisible ? "" : <Cards veri={data} />}
+                {cardVisible ? "" : <Cards user={user} />}
             </Form>
             
 
